@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CartonCaps.WebAPI</name>
+    </assembly>
+    <members>
+        <member name="T:CartonCaps.WebAPI.Controllers.ReferralController">
+            <summary>
+            API Controller for managing referrals.
+            </summary>
+            <remarks> This controller provides endpoints to retrieve, create and update referrals.</remarks>    
+            <example> 
+            GET /api/referral/[id]
+            POST /api/referral
+            PATCH /api/referral/[referralId]/status/[status]
+            </example>
+        </member>
+        <member name="M:CartonCaps.WebAPI.Controllers.ReferralController.#ctor(CartonCaps.Application.Repositories.IReferralRepository)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CartonCaps.WebAPI.Controllers.ReferralController"/> class.
+            </summary>
+            <param name="referralRepository"></param>
+        </member>
+        <member name="M:CartonCaps.WebAPI.Controllers.ReferralController.GetReferrals(System.Guid)">
+            <summary> Gets a list of referrals.</summary>
+        </member>
+        <member name="M:CartonCaps.WebAPI.Controllers.ReferralController.CreateReferral(System.Guid)">
+            <summary>
+            Creates a new referral for a user.
+            </summary>
+            <param name="userId">User ID to create referral for</param>
+            <returns>IActionResult</returns>
+        </member>
+        <member name="M:CartonCaps.WebAPI.Controllers.ReferralController.UpdateReferralStatus(System.Guid,CartonCaps.Domain.Enums.ReferralStatus)">
+            <summary>
+            Updates the status of a referral.
+            </summary>
+            <param name="referralId"></param>
+            <param name="status"></param>
+            <returns>IActionResult for the API call.</returns>
+        </member>
+        <member name="M:CartonCaps.WebAPI.Controllers.ReferralController.ClaimReferral(System.Guid,System.Guid)">
+            <summary>
+            Claims a referral for a user, marking it as claimed.
+            </summary>
+            <param name="referralId"></param>
+            <param name="claimedByUserId"></param>
+            <returns>IActionResult with the API result data.</returns>
+        </member>
+        <member name="M:CartonCaps.WebAPI.Controllers.ReferralController.GetReferralStatuses">
+            <summary>
+            Gets all possible referral statuses.
+            </summary>
+            <returns>IActionResult with the list of referral statuses.</returns>
+        </member>
+        <member name="T:CartonCaps.WebAPI.Controllers.StatusController">
+            <summary>
+            API Controller for checking the health status of the CartonCaps API.
+            </summary>
+        </member>
+        <member name="M:CartonCaps.WebAPI.Controllers.StatusController.GetStatus">
+            <summary> Returns the status of the CartonCaps API.</summary>
+            <returns> A simple status message indicating the API is running.</returns>
+        </member>
+        <member name="T:CartonCaps.WebAPI.ResponseModels.BadRequestResponse">
+            <summary>
+            Represents a bad request response model.
+            </summary>
+        </member>
+        <member name="M:CartonCaps.WebAPI.ResponseModels.BadRequestResponse.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:CartonCaps.WebAPI.ResponseModels.BadRequestResponse"/> class.
+            Sets the default status to "Error".
+            </summary>
+        </member>
+        <member name="P:CartonCaps.WebAPI.ResponseModels.BadRequestResponse.Message">
+            <summary>
+            Gets or sets the error message.
+            </summary>
+        </member>
+        <member name="T:CartonCaps.WebAPI.ResponseModels.BaseResponse">
+            <summary>
+            Base class for all API response models.
+            </summary>
+        </member>
+        <member name="P:CartonCaps.WebAPI.ResponseModels.BaseResponse.Status">
+            <summary>
+            Gets or sets the status of the response.
+            </summary>
+        </member>
+        <member name="T:CartonCaps.WebAPI.ResponseModels.ErrorResponse">
+            <summary>
+            Represents an unhandled error response model.
+            </summary>
+        </member>
+        <member name="M:CartonCaps.WebAPI.ResponseModels.ErrorResponse.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:CartonCaps.WebAPI.ResponseModels.ErrorResponse"/> class.
+            Sets the default status to "Error".
+            </summary>
+        </member>
+        <member name="P:CartonCaps.WebAPI.ResponseModels.ErrorResponse.Message">
+            <summary>
+            Gets or sets the error message.
+            </summary>
+        </member>
+        <member name="P:CartonCaps.WebAPI.ResponseModels.ErrorResponse.Details">
+            <summary>
+            Gets or sets additional details about the error.
+            </summary>
+        </member>
+        <member name="T:CartonCaps.WebAPI.ResponseModels.NewReferralResponse">
+            <summary>
+            Response model for creating a new referral.
+            </summary>
+        </member>
+        <member name="M:CartonCaps.WebAPI.ResponseModels.NewReferralResponse.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:CartonCaps.WebAPI.ResponseModels.NewReferralResponse"/> class.
+            Sets the default status to "Success".
+            </summary>
+        </member>
+        <member name="P:CartonCaps.WebAPI.ResponseModels.NewReferralResponse.Message">
+            <summary>
+            Gets or sets the message indicating the result of the referral creation.
+            </summary>
+        </member>
+        <member name="P:CartonCaps.WebAPI.ResponseModels.NewReferralResponse.ReferralId">
+            <summary>
+            Gets or sets the ID of the newly created referral.
+            </summary>
+        </member>
+        <member name="P:CartonCaps.WebAPI.ResponseModels.NewReferralResponse.ShareLink">
+            <summary>
+            Gets or sets the share link for the referral.
+            </summary>
+        </member>
+        <member name="T:CartonCaps.WebAPI.ResponseModels.ReferralListResponse">
+            <summary>
+            Response model for a list of referrals.
+            </summary>
+        </member>
+        <member name="M:CartonCaps.WebAPI.ResponseModels.ReferralListResponse.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:CartonCaps.WebAPI.ResponseModels.ReferralListResponse"/> class.
+            Sets the default status to "Success".
+            </summary>
+        </member>
+        <member name="P:CartonCaps.WebAPI.ResponseModels.ReferralListResponse.TotalCount">
+            <summary>
+            Gets or sets the total count of referrals.
+            </summary>
+        </member>
+        <member name="P:CartonCaps.WebAPI.ResponseModels.ReferralListResponse.Referrals">
+            <summary>
+            Gets or sets the list of referrals.
+            </summary>
+        </member>
+        <member name="T:CartonCaps.WebAPI.ResponseModels.ReferralUpdatedResponse">
+            <summary>
+            Response model for updating a referral.
+            </summary>
+        </member>
+        <member name="M:CartonCaps.WebAPI.ResponseModels.ReferralUpdatedResponse.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:CartonCaps.WebAPI.ResponseModels.ReferralUpdatedResponse"/> class.
+            Sets the default status to "Success".
+            </summary>
+        </member>
+        <member name="P:CartonCaps.WebAPI.ResponseModels.ReferralUpdatedResponse.Message">
+            <summary>
+            Gets or sets the message indicating the result of the referral creation.
+            </summary>
+        </member>
+        <member name="P:CartonCaps.WebAPI.ResponseModels.ReferralUpdatedResponse.ReferralId">
+            <summary>
+            Gets or sets the ID of the newly created referral.
+            </summary>
+        </member>
+        <member name="P:CartonCaps.WebAPI.ResponseModels.ReferralUpdatedResponse.NewStatus">
+            <summary>
+            Gets or sets the referral status after the update.
+            </summary>
+        </member>
+    </members>
+</doc>

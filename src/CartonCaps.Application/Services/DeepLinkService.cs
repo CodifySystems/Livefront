@@ -1,6 +1,9 @@
 namespace CartonCaps.Application.Services;
 
-public static class DeepLinks
+/// <summary>
+/// Service for generating deferred deep links for users with referral codes.
+/// </summary>
+public static class DeepLinkService
 {
     /// <summary>
     /// Generates a deferred deep link for a user with a referral code to be shared.
@@ -29,7 +32,7 @@ public static class DeepLinks
         // Call 3rd party service to generate the deep link
         // This is a placeholder for the actual implementation.
         // In a real application, you would call the service here and handle any exceptions.
-        // Example: DeepLinkService.GenerateDeepLink(_userId, _referralCode);
+        // For example, you might use an HTTP client to call an API that generates the deep link.
 
         // Simulated deep link generation
         string deepLinkId = GenerateDeepLinkId();
@@ -38,6 +41,10 @@ public static class DeepLinks
         return deepLink;
     }
 
+    /// <summary>
+    /// Generates a unique deep link ID for the referral link.
+    /// </summary>
+    /// <returns>String value containing shareable deep link for user's referral code.</returns>
     private static string GenerateDeepLinkId()
     {
         // This method generates a unique deep link ID.

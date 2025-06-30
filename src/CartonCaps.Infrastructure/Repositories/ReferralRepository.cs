@@ -5,18 +5,33 @@ using CartonCaps.Domain.Entities;
 using CartonCaps.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace CartonCaps.Infrastructure.Repositories;
 
+/// <summary>
+/// Repository for managing referrals in the system.
+/// </summary>
 public class ReferralRepository : IReferralRepository
 {
     private readonly MockDbContext _context;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ReferralRepository"/> class.
+    /// </summary>
+    /// <param name="context">Database context to use for this object</param>
+    /// <exception cref="ArgumentNullException"></exception>
+    /// <remarks>Uses MockDbContext for testing purposes.</remarks>
     public ReferralRepository(MockDbContext context)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
+    /// <summary>
+    /// Adds a new referral for a user by their UserId.
+    /// </summary>
+    /// <param name="userId">User ID if user adding referral</param>
+    /// <returns>Referral entity of newly added referral</returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    /// <exception cref="NotFoundException"></exception>
     public async Task<Referral> AddReferralForUserAsync(Guid userId)
     {
         if (userId == Guid.Empty)
@@ -37,7 +52,7 @@ public class ReferralRepository : IReferralRepository
         var referral = new Referral
         {
             UserId = user.UserId,
-            ReferredDeepLink = DeepLinks.GetDeepLink(user.UserId, user.ReferralCode),
+            ReferredDeepLink = DeepLinkService.GetDeepLink(user.UserId, user.ReferralCode),
             Status = ReferralStatus.InProgress // Default status
         };
 
@@ -47,6 +62,12 @@ public class ReferralRepository : IReferralRepository
         return referral;
     }
 
+    /// <summary>
+    /// Retrieves all referrals for a specific user by their UserId.
+    /// </summary>
+    /// <param name="userId">User ID to retrieve referrals for</param>
+    /// <returns>List of Referral entities</returns>
+    /// <exception cref="ArgumentNullException"></exception>
     public Task<List<Referral>> GetReferralsByUserIdAsync(Guid userId)
     {
         if (userId == Guid.Empty)
@@ -54,10 +75,21 @@ public class ReferralRepository : IReferralRepository
             throw new ArgumentNullException("User Id cannot be empty.", nameof(userId));
         }
 
-        // Simulate fetching referrals from a database or service
-        return _context.Referrals.Where(r => r.UserId == userId).ToListAsync();
+        // Fetch referrals for the specified user
+        return _context.Referrals
+            .Where(r => r.UserId == userId)
+            .ToListAsync();
     }
 
+    /// <summary>
+    /// Updates the status of a referral.
+    /// </summary>
+    /// <param name="referralId">Idenfier for the referral</param>
+    /// <param name="status">Referral status value</param>
+    /// <returns>Claimed referral entity.</returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="BadRequestException"></exception>
     public Task<Referral> UpdateReferralStatusAsync(Guid referralId, ReferralStatus status)
     {
         if (referralId == Guid.Empty)
@@ -99,6 +131,14 @@ public class ReferralRepository : IReferralRepository
         return referral;
     }
 
+    /// <summary>
+    /// Claims a referral for a user.
+    /// </summary>
+    /// <param name="referralId">Idenfier for the referral</param>
+    /// <param name="claimedByUserId">User ID for the user claiming this referral</param>
+    /// <returns>Claimed referral entity.</returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    /// <exception cref="BadRequestException"></exception>
     public async Task<Referral> ClaimReferralAsync(Guid referralId, Guid claimedByUserId)
     {
         if (referralId == Guid.Empty)
@@ -159,6 +199,7 @@ public class ReferralRepository : IReferralRepository
             // Update the status to Completed and set the user who claimed it
             referral.Status = ReferralStatus.Completed;
             referral.ClaimedByUserId = claimant.UserId;
+            referral.ClaimedByUserName = claimant.ShortDisplayName; // Set the display name of the user who claimed the referral
             referral.UpdateTimestamp();
 
             // Save changes to the database

@@ -4,20 +4,22 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CartonCaps.Infrastructure.Repositories;
 
+/// <summary>
+/// Repository for managing user data in the system.
+/// </summary>
 public class UserRepository : IUserRepository
 {
     private readonly MockDbContext _context;
 
-    // // Simulated in-memory data store
-    // private readonly MockDbContext _context = new MockDbContext(
-    //     new DbContextOptionsBuilder<MockDbContext>()
-    //         .UseInMemoryDatabase("CartonCapsDatabase")
-    //         .Options);
-
+    /// <summary>
+    /// Initializes a new instance of the <see cref="UserRepository"/> class.
+    /// </summary>
+    /// <param name="context"></param>
+    /// <exception cref="ArgumentNullException"></exception>
     public UserRepository(MockDbContext context)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
-        
+
         // _context.Database.EnsureCreated();
 
         // // Seed initial data if necessary
@@ -26,6 +28,13 @@ public class UserRepository : IUserRepository
         //     _context.SeedData();
         // }
     }
+
+    /// <summary>
+    /// Retrieves a user by their unique identifier (UserId).
+    /// </summary>
+    /// <param name="userId"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
     public Task<User> GetUserByIdAsync(Guid userId)
     {
         if (userId == Guid.Empty)

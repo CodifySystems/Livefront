@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CartonCaps.Infrastructure</name>
+    </assembly>
+    <members>
+        <member name="T:CartonCaps.Infrastructure.MockDbContext">
+            <summary>
+            Mock database context for testing purposes.
+            </summary>
+        </member>
+        <member name="M:CartonCaps.Infrastructure.MockDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{CartonCaps.Infrastructure.MockDbContext})">
+            <summary>
+            Initializes a new instance of the <see cref="T:CartonCaps.Infrastructure.MockDbContext"/> class with the specified options.
+            </summary>
+            <param name="options">DbContext options</param>
+        </member>
+        <member name="P:CartonCaps.Infrastructure.MockDbContext.Users">
+            <summary>
+            Gets or sets the DbSet for User entities.
+            </summary>
+        </member>
+        <member name="P:CartonCaps.Infrastructure.MockDbContext.Referrals">
+            <summary>
+            Gets or sets the DbSet for Referral entities.
+            </summary>
+        </member>
+        <member name="M:CartonCaps.Infrastructure.MockDbContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Configures the model for the mock database context with the User and Referral entities.
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
+        <member name="M:CartonCaps.Infrastructure.MockDbContext.SeedData">
+            <summary>
+            Seeds initial data into the mock database context.
+            </summary>
+        </member>
+        <member name="T:CartonCaps.Infrastructure.Repositories.ReferralRepository">
+            <summary>
+            Repository for managing referrals in the system.
+            </summary>
+        </member>
+        <member name="M:CartonCaps.Infrastructure.Repositories.ReferralRepository.#ctor(CartonCaps.Infrastructure.MockDbContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CartonCaps.Infrastructure.Repositories.ReferralRepository"/> class.
+            </summary>
+            <param name="context">Database context to use for this object</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <remarks>Uses MockDbContext for testing purposes.</remarks>
+        </member>
+        <member name="M:CartonCaps.Infrastructure.Repositories.ReferralRepository.AddReferralForUserAsync(System.Guid)">
+            <summary>
+            Adds a new referral for a user by their UserId.
+            </summary>
+            <param name="userId">User ID if user adding referral</param>
+            <returns>Referral entity of newly added referral</returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:CartonCaps.Application.Common.Exceptions.NotFoundException"></exception>
+        </member>
+        <member name="M:CartonCaps.Infrastructure.Repositories.ReferralRepository.GetReferralsByUserIdAsync(System.Guid)">
+            <summary>
+            Retrieves all referrals for a specific user by their UserId.
+            </summary>
+            <param name="userId">User ID to retrieve referrals for</param>
+            <returns>List of Referral entities</returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:CartonCaps.Infrastructure.Repositories.ReferralRepository.UpdateReferralStatusAsync(System.Guid,CartonCaps.Domain.Enums.ReferralStatus)">
+            <summary>
+            Updates the status of a referral.
+            </summary>
+            <param name="referralId">Idenfier for the referral</param>
+            <param name="status">Referral status value</param>
+            <returns>Claimed referral entity.</returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:CartonCaps.Application.Common.Exceptions.BadRequestException"></exception>
+        </member>
+        <member name="M:CartonCaps.Infrastructure.Repositories.ReferralRepository.ClaimReferralAsync(System.Guid,System.Guid)">
+            <summary>
+            Claims a referral for a user.
+            </summary>
+            <param name="referralId">Idenfier for the referral</param>
+            <param name="claimedByUserId">User ID for the user claiming this referral</param>
+            <returns>Claimed referral entity.</returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:CartonCaps.Application.Common.Exceptions.BadRequestException"></exception>
+        </member>
+        <member name="T:CartonCaps.Infrastructure.Repositories.UserRepository">
+            <summary>
+            Repository for managing user data in the system.
+            </summary>
+        </member>
+        <member name="M:CartonCaps.Infrastructure.Repositories.UserRepository.#ctor(CartonCaps.Infrastructure.MockDbContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CartonCaps.Infrastructure.Repositories.UserRepository"/> class.
+            </summary>
+            <param name="context"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:CartonCaps.Infrastructure.Repositories.UserRepository.GetUserByIdAsync(System.Guid)">
+            <summary>
+            Retrieves a user by their unique identifier (UserId).
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+    </members>
+</doc>

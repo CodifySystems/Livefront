@@ -2,6 +2,9 @@ using System.Text.Json.Serialization;
 
 namespace CartonCaps.WebAPI.ResponseModels;
 
+/// <summary>
+/// Response model for creating a new referral.
+/// </summary>
 public class NewReferralResponse : BaseResponse
 {
     /// <summary>

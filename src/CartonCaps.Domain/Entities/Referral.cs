@@ -4,6 +4,11 @@ using CartonCaps.Domain.Enums;
 
 namespace CartonCaps.Domain.Entities;
 
+/// <summary>
+/// Represents a referral entity in the system.
+/// </summary>
+/// <remarks>Inherits from <see cref="BaseEntity"/>.</remarks>
+/// <seealso cref="BaseEntity"/>
 public sealed class Referral : BaseEntity
 {
     /// <summary>
@@ -20,6 +25,11 @@ public sealed class Referral : BaseEntity
     /// The user ID of the user who claimed the referral, if applicable.
     /// </summary>
     public Guid? ClaimedByUserId { get; set; }
+
+    /// <summary>
+    /// The display name of the user who claimed the referral, if applicable.
+    /// </summary>
+    public string? ClaimedByUserName { get; set; }
 
     /// <summary>
     /// The deep link that refers to the user's referral page.

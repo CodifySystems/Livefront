@@ -1,5 +1,8 @@
 namespace CartonCaps.Application.Common.Exceptions;
 
+/// <summary>
+/// Represents an exception that is thrown when a bad request is made to the server.
+/// </summary>
 public class BadRequestException : Exception
 {
     /// <summary>
@@ -18,11 +21,4 @@ public class BadRequestException : Exception
     public BadRequestException(string message, Exception innerException) : base(message, innerException)
     {
     }
-
-    public BadRequestException(string[] errors) : base("Multiple errors occurred. See inner exceptions for details.")
-    {
-        Errors = errors;
-    }
-
-    public string[] Errors { get; }
 }

@@ -3,6 +3,9 @@ using CartonCaps.Domain.Entities;
 
 namespace CartonCaps.WebAPI.ResponseModels
 {
+    /// <summary>
+    /// Response model for a list of referrals.
+    /// </summary>
     public class ReferralListResponse : BaseResponse
     {
         /// <summary>
@@ -12,7 +15,7 @@ namespace CartonCaps.WebAPI.ResponseModels
         public ReferralListResponse()
         {
             Status = "Success";
-        }        
+        }
 
         /// <summary>
         /// Gets or sets the total count of referrals.
@@ -24,6 +27,6 @@ namespace CartonCaps.WebAPI.ResponseModels
         /// Gets or sets the list of referrals.
         /// </summary>
         [JsonPropertyOrder(2)]
-        public required List<Referral> Referrals { get; set; } 
+        public required List<Referral> Referrals { get; set; }
     }
 }

@@ -25,13 +25,17 @@ namespace CartonCaps.WebAPI.Controllers
     {
         private readonly IReferralRepository _referralRepository;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ReferralController"/> class.
+        /// </summary>
+        /// <param name="referralRepository"></param>
         public ReferralController(IReferralRepository referralRepository)
         {
             _referralRepository = referralRepository;
         }
 
-        [HttpGet]
         /// <summary> Gets a list of referrals.</summary>
+        [HttpGet]
         public async Task<IActionResult> GetReferrals([FromRoute] Guid userId)
         {
             if (userId == Guid.Empty)
@@ -78,6 +82,11 @@ namespace CartonCaps.WebAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Creates a new referral for a user.
+        /// </summary>
+        /// <param name="userId">User ID to create referral for</param>
+        /// <returns>IActionResult</returns>
         [HttpPost]
         public async Task<IActionResult> CreateReferral([FromRoute] Guid userId)
         {
@@ -114,6 +123,12 @@ namespace CartonCaps.WebAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Updates the status of a referral.
+        /// </summary>
+        /// <param name="referralId"></param>
+        /// <param name="status"></param>
+        /// <returns>IActionResult for the API call.</returns>
         [Route("~/api/referral/{referralId:guid}/status/{status}")]
         [HttpPatch]
         public async Task<IActionResult> UpdateReferralStatus([FromRoute] Guid referralId, [FromRoute] ReferralStatus status)
@@ -159,6 +174,12 @@ namespace CartonCaps.WebAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Claims a referral for a user, marking it as claimed.
+        /// </summary>
+        /// <param name="referralId"></param>
+        /// <param name="claimedByUserId"></param>
+        /// <returns>IActionResult with the API result data.</returns>
         [Route("~/api/referral/{referralId:guid}/claim/{claimedByUserId:guid}")]
         [HttpPost]
         public async Task<IActionResult> ClaimReferral([FromRoute] Guid referralId, [FromRoute] Guid claimedByUserId)
@@ -204,7 +225,10 @@ namespace CartonCaps.WebAPI.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Gets all possible referral statuses.
+        /// </summary>
+        /// <returns>IActionResult with the list of referral statuses.</returns>
         [Route("~/api/referral/statuses")]
         [HttpGet]
         public IActionResult GetReferralStatuses()

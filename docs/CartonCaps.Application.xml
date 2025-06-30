@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CartonCaps.Application</name>
+    </assembly>
+    <members>
+        <member name="T:CartonCaps.Application.Common.Exceptions.BadRequestException">
+            <summary>
+            Represents an exception that is thrown when a bad request is made to the server.
+            </summary>
+        </member>
+        <member name="M:CartonCaps.Application.Common.Exceptions.BadRequestException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CartonCaps.Application.Common.Exceptions.BadRequestException"/> class with a specified error message.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:CartonCaps.Application.Common.Exceptions.BadRequestException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CartonCaps.Application.Common.Exceptions.BadRequestException"/> class with a specified error message and inner exception.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+            <param name="innerException">The exception that is the cause of the current exception.</param>
+        </member>
+        <member name="T:CartonCaps.Application.Common.Exceptions.NotFoundException">
+            <summary>
+            Represents an exception that is thrown when a requested resource is not found.
+            </summary>
+        </member>
+        <member name="M:CartonCaps.Application.Common.Exceptions.NotFoundException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CartonCaps.Application.Common.Exceptions.NotFoundException"/> class with a specified error message.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:CartonCaps.Application.Common.Exceptions.NotFoundException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CartonCaps.Application.Common.Exceptions.NotFoundException"/> class with a specified error message and inner exception.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+            <param name="innerException">The exception that is the cause of the current exception.</param>
+        </member>
+        <member name="T:CartonCaps.Application.Repositories.IReferralRepository">
+            <summary>
+            Interface for managing referrals in the system.
+            </summary>
+        </member>
+        <member name="M:CartonCaps.Application.Repositories.IReferralRepository.GetReferralsByUserIdAsync(System.Guid)">
+            <summary>
+            Retrieves a list of referrals for a specific user.
+            </summary>
+            <param name="userId">The unique identifier of the user.</param>
+            <returns>A list of referrals associated with the specified user.</returns>
+        </member>
+        <member name="M:CartonCaps.Application.Repositories.IReferralRepository.AddReferralForUserAsync(System.Guid)">
+            <summary>
+            Adds a new referral for a user.
+            </summary>
+            <param name="userId"></param>
+            <returns>The newly created referral entity.</returns>
+        </member>
+        <member name="M:CartonCaps.Application.Repositories.IReferralRepository.UpdateReferralStatusAsync(System.Guid,CartonCaps.Domain.Enums.ReferralStatus)">
+            <summary>
+            Updates the status of a referral.
+            </summary>
+            <param name="referralId">The unique identifier of the referral.</param>
+            <param name="status">The new status to set for the referral.</param>
+            <returns>The updated referral entity.</returns>
+        </member>
+        <member name="M:CartonCaps.Application.Repositories.IReferralRepository.ClaimReferralAsync(System.Guid,System.Guid)">
+            <summary>
+            This method is used when a user claims a referral, marking it as claimed.
+            </summary>
+            <param name="referralId">The unique identifier of the referral to be claimed.</param>
+            <param name="claimedByUserId">The unique identifier of the user claiming the referral.</param>
+            <returns>The claimed referral entity.</returns>
+        </member>
+        <member name="T:CartonCaps.Application.Repositories.IUserRepository">
+            <summary>
+            Interface for user repository operations.
+            </summary>
+        </member>
+        <member name="M:CartonCaps.Application.Repositories.IUserRepository.GetUserByIdAsync(System.Guid)">
+            <summary>
+            Gets a user by their ID.
+            </summary>
+            <param name="userId">The ID of the user.</param>
+            <returns>The user entity for the specified user ID.</returns>
+        </member>
+        <member name="T:CartonCaps.Application.Services.DeepLinkService">
+            <summary>
+            Service for generating deferred deep links for users with referral codes.
+            </summary>
+        </member>
+        <member name="M:CartonCaps.Application.Services.DeepLinkService.GetDeepLink(System.Guid,System.String)">
+            <summary>
+            Generates a deferred deep link for a user with a referral code to be shared.
+            </summary>
+            <param name="userId">User ID for the referral link</param>
+            <param name="referralCode">User's Referral Code to be used for the deep link</param>
+            <returns>Shareable Deferred Deep Link URI</returns>
+            <example>GetDeepLink(user.UserId, user.ReferralCode)</example>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:CartonCaps.Application.Services.DeepLinkService.GenerateDeepLinkId">
+            <summary>
+            Generates a unique deep link ID for the referral link.
+            </summary>
+            <returns>String value containing shareable deep link for user's referral code.</returns>
+        </member>
+    </members>
+</doc>

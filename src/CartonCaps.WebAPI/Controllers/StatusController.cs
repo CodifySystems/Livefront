@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CartonCaps.WebAPI.Controllers
 {
+    /// <summary>
+    /// API Controller for checking the health status of the CartonCaps API.
+    /// </summary>
     [ApiController]
     [Route("/api/status")]
     public class StatusController : ControllerBase

@@ -3,6 +3,9 @@ using CartonCaps.Domain.Enums;
 
 namespace CartonCaps.WebAPI.ResponseModels;
 
+/// <summary>
+/// Response model for updating a referral.
+/// </summary>
 public class ReferralUpdatedResponse : BaseResponse
 {
     /// <summary>
@@ -31,5 +34,4 @@ public class ReferralUpdatedResponse : BaseResponse
     /// </summary>
     [JsonPropertyOrder(3)]
     public ReferralStatus NewStatus { get; set; }
-
 }
