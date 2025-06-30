@@ -1,0 +1,59 @@
+@baseurl = http://localhost:5155
+@userId = 29fd60d2-cf8b-4f93-ab8b-d9e5d768fc1a
+@alreadyClaimUserId = b1c2d3e4-f5a6-7b8c-9d0e-f1a2b3c4d5e6
+@claimUserId = fd9e60df-7b1c-41fa-8e96-ee561a7ee870
+@unclaimedReferralId = 714c572a-4ff7-4801-8684-2672ade84c1b
+@claimedReferralId = 13d2920e-f5c4-4ee6-a97a-1ff50d55eda8
+
+
+# CartonCaps Web API Test Suite
+# This file contains a collection of HTTP requests to test the CartonCaps Web API endpoints.
+# Ensure the base URL is set correctly for your local environment.
+
+###
+# Get API status
+GET {{baseurl}}/api/status
+Accept: application/json
+
+###
+# Get all referral statuses
+GET {{baseurl}}/api/referral/statuses
+Accept: application/json
+
+###
+# Get all referrals for a user
+GET {{baseurl}}/api/referral/{{userId}}
+Accept: application/json
+
+###
+# Create a new referral for the user
+# @name newReferral
+POST {{baseurl}}/api/referral/{{userId}}
+Accept: application/json
+
+###
+# Update the referral status to Abandoned
+PATCH {{baseurl}}/api/referral/{{newReferral.response.body.$.referralId}}/status/Abandoned
+Accept: application/json
+
+###
+# Failure case: Update the Abandoned referral to status Completed
+PATCH {{baseurl}}/api/referral/{{newReferral.response.body.$.referralId}}/status/Completed
+Accept: application/json
+
+###
+# Claim a referral
+POST {{baseurl}}/api/referral/{{unclaimedReferralId}}/claim/{{claimUserId}}
+Accept: application/json
+
+###
+# Failure case: Claim a referral that has already been claimed
+POST {{baseurl}}/api/referral/{{claimedReferralId}}/claim/{{claimUserId}}
+Accept: application/json
+
+###
+# Failure case: Claim a referral that by user that has already been claimed
+POST {{baseurl}}/api/referral/{{unclaimedReferralId}}/claim/{{alreadyClaimUserId}}
+Accept: application/json
+
+###

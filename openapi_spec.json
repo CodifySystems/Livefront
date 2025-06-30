@@ -1,0 +1,481 @@
+{
+	"info": {
+		"_postman_id": "c7f9598c-1d40-46a8-9e85-6c7ff4c3dbb8",
+		"name": "CartonCaps",
+		"description": "Carton Caps is an app that empowers consumers to raise money for the schools they care about, while buying the everyday products they love.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "773186"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "status",
+					"item": [
+						{
+							"name": "Get API Status",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/status",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"status"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/status",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"status"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "{\r\n    \"status\": \"CartonCaps API is running smoothly!\"\r\n}"
+								},
+								{
+									"name": "Error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/status",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"status"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": "{\r\n    \"status\": \"CartonCaps API is encountered a server error!\"\r\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "referral",
+					"item": [
+						{
+							"name": "{userId}",
+							"item": [
+								{
+									"name": "Create Referral Share Link",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/referral/:userId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"referral",
+												":userId"
+											],
+											"variable": [
+												{
+													"key": "userId",
+													"value": "{{userId}}"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/referral/:userId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"referral",
+														":userId"
+													],
+													"variable": [
+														{
+															"key": "userId",
+															"value": "{{userId}}"
+														}
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json",
+													"description": "",
+													"type": "text"
+												}
+											],
+											"cookie": [],
+											"body": "{\r\n    \"status\": \"Success\",\r\n    \"message\": \"Referral created successfully.\",\r\n    \"referralId\": \"cf15e3fb-1768-4f3b-9bc1-76fed9cc8391\",\r\n    \"shareLink\": \"https://cartoncaps.link/bppw4gnc9y2?referralCode=AL1C3B\"\r\n}"
+										}
+									]
+								},
+								{
+									"name": "Get Referrals",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/referral/:userId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"referral",
+												":userId"
+											],
+											"variable": [
+												{
+													"key": "userId",
+													"value": "{{userId}}"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/referral/:userId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"referral",
+														":userId"
+													],
+													"variable": [
+														{
+															"key": "userId",
+															"value": "{{userId}}"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json",
+													"description": "",
+													"type": "text"
+												}
+											],
+											"cookie": [],
+											"body": "{\r\n  \"status\": \"Success\",\r\n  \"totalCount\": 3,\r\n  \"referrals\": [\r\n    {\r\n      \"referralId\": \"1d1fbb4e-0b6f-4392-9450-43a466bf9aa0\",\r\n      \"userId\": \"29fd60d2-cf8b-4f93-ab8b-d9e5d768fc1a\",\r\n      \"shareLink\": \"https://cartoncaps.link/lo32ing90ab?referralCode=AL1C3B\",\r\n      \"status\": \"InProgress\",\r\n      \"id\": 1,\r\n      \"createdAt\": \"2025-06-29T01:47:29.2022335Z\",\r\n      \"updatedAt\": \"2025-06-29T01:47:29.2022339Z\"\r\n    },\r\n    {\r\n      \"referralId\": \"db81c0d6-3131-41ee-8c3a-97bd4e10bb8a\",\r\n      \"userId\": \"29fd60d2-cf8b-4f93-ab8b-d9e5d768fc1a\",\r\n      \"shareLink\": \"https://cartoncaps.link/pqj82jabb9q?referralCode=AL1C3B\",\r\n      \"status\": \"Completed\",\r\n      \"id\": 2,\r\n      \"createdAt\": \"2025-06-29T01:47:29.2024501Z\",\r\n      \"updatedAt\": \"2025-06-29T01:47:29.2024505Z\"\r\n    },\r\n    {\r\n      \"referralId\": \"d8bacd3f-c9ca-45a7-ac2f-9b8f56c3a3fe\",\r\n      \"userId\": \"29fd60d2-cf8b-4f93-ab8b-d9e5d768fc1a\",\r\n      \"shareLink\": \"https://cartoncaps.link/lo32dq4abbe?referralCode=AL1C3B\",\r\n      \"status\": \"Abandoned\",\r\n      \"id\": 3,\r\n      \"createdAt\": \"2025-06-29T01:47:29.2024517Z\",\r\n      \"updatedAt\": \"2025-06-29T01:47:29.2024517Z\"\r\n    }\r\n  ]\r\n}"
+										},
+										{
+											"name": "No Results",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/referral/:userId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"referral",
+														":userId"
+													],
+													"variable": [
+														{
+															"key": "userId",
+															"value": "6ba74a35-ffa3-49dd-bbea-ad68095b1b50"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json",
+													"description": "",
+													"type": "text"
+												}
+											],
+											"cookie": [],
+											"body": "{\r\n    \"status\": \"Error\",\r\n    \"message\": \"No referrals found for this user.\"\r\n}"
+										},
+										{
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/referral/:userId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"referral",
+														":userId"
+													],
+													"variable": [
+														{
+															"key": "userId",
+															"value": "00000000-0000-0000-0000-000000000000"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json",
+													"name": "Content-Type",
+													"description": "",
+													"type": "text"
+												}
+											],
+											"cookie": [],
+											"body": "{\r\n    \"status\": \"Error\",\r\n    \"message\": \"User ID cannot be empty.\"\r\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "statuses",
+							"item": [
+								{
+									"name": "Get Statuses",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/referral/statuses",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"referral",
+												"statuses"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/referral/statuses",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"referral",
+														"statuses"
+													]
+												}
+											},
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json",
+													"name": "Content-Type",
+													"description": "",
+													"type": "text"
+												}
+											],
+											"cookie": [],
+											"body": "{\r\n    \"status\": \"Success\",\r\n    \"referralStatuses\": [\r\n        {\r\n            \"name\": \"InProgress\",\r\n            \"value\": 0\r\n        },\r\n        {\r\n            \"name\": \"Completed\",\r\n            \"value\": 1\r\n        },\r\n        {\r\n            \"name\": \"Abandoned\",\r\n            \"value\": 2\r\n        }\r\n    ]\r\n}"
+										}
+									]
+								}
+							],
+							"description": "Used to retreive a list of Referral Status options for updating and displaying referral information."
+						},
+						{
+							"name": "{referralId}",
+							"item": [
+								{
+									"name": "status",
+									"item": [
+										{
+											"name": "Update Referral Status",
+											"request": {
+												"method": "PATCH",
+												"header": [],
+												"body": {
+													"mode": "formdata",
+													"formdata": [
+														{
+															"key": "ReferralStatus",
+															"value": "Completed",
+															"type": "text"
+														}
+													]
+												},
+												"url": {
+													"raw": "{{baseUrl}}/referral/:referralId/status/:status",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"referral",
+														":referralId",
+														"status",
+														":status"
+													],
+													"variable": [
+														{
+															"key": "referralId",
+															"value": ""
+														},
+														{
+															"key": "status",
+															"value": ""
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "PATCH",
+														"header": [],
+														"url": {
+															"raw": "{{baseUrl}}/referral/:referralId/status/:status",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"referral",
+																":referralId",
+																"status",
+																":status"
+															],
+															"variable": [
+																{
+																	"key": "referralId",
+																	"value": "421f3027-0857-4ac4-b664-196be5fd930a"
+																},
+																{
+																	"key": "status",
+																	"value": "Completed"
+																}
+															]
+														}
+													},
+													"status": "Accepted",
+													"code": 202,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json",
+															"description": "",
+															"type": "text"
+														}
+													],
+													"cookie": [],
+													"body": "{\r\n  \"status\": \"Success\",\r\n  \"message\": \"Referral status updated successfully.\",\r\n  \"referralId\": 1,\r\n  \"newStatus\": \"Completed\"\r\n}"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:5155/api",
+			"type": "string"
+		},
+		{
+			"key": "userId",
+			"value": "29fd60d2-cf8b-4f93-ab8b-d9e5d768fc1a",
+			"type": "string"
+		}
+	]
+}
