@@ -41,10 +41,14 @@ If you would like to run the tests with code coverage use the following command 
 
 `dotnet test /p:CollectCoverage=true`
 
-## OpenAPI Specification
-The OpenAPI spec can be found in the project root folder [openapi_spec.json](./openapi_spec.json) and can be used with Postman or any other tool for testing or implementing the API. It also provides examples for the API methods based on the sample data included in the mocked database objects.
+## Deliverable #1 -  API Specification
+The OpenAPI spec can be found in the project root folder [openapi_spec.yaml](./openapi_spec.yaml) 
 
-## Projects
+Postman collection also available in the project root folder [CartonCaps.postman_collection.json](.CartonCaps.postman_collection.json) for testing or implementing the API. It also provides examples for the API methods based on the sample data included in the mocked database objects.
+
+[Redocly HTML view of the API spec documentation](./redoc-static.html)
+
+## Deliverable #2 - Mock API .NET Core Solution
 ### CartonCaps.Application
 [./src/CartonCaps.WebAPI/CartonCaps.Application.csproj](./src/CartonCaps.Application/CartonCaps.Application.csproj)
 - Provides Application Layer functionality

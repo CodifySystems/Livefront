@@ -155,6 +155,60 @@
 											],
 											"cookie": [],
 											"body": "{\r\n    \"status\": \"Success\",\r\n    \"message\": \"Referral created successfully.\",\r\n    \"referralId\": \"cf15e3fb-1768-4f3b-9bc1-76fed9cc8391\",\r\n    \"shareLink\": \"https://cartoncaps.link/bppw4gnc9y2?referralCode=AL1C3B\"\r\n}"
+										},
+										{
+											"name": "User Not Found",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/referral/:userId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"referral",
+														":userId"
+													],
+													"variable": [
+														{
+															"key": "userId",
+															"value": "b0aca8d8-03ff-46d3-bcca-f1ce8757a867"
+														}
+													]
+												}
+											},
+											"_postman_previewlanguage": null,
+											"header": null,
+											"cookie": [],
+											"body": "{\r\n    \"status\": \"Error\",\r\n    \"message\": \"An unexpected error occurred.\",\r\n    \"details\": \"User not found.\"\r\n}"
+										},
+										{
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/referral/:userId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"referral",
+														":userId"
+													],
+													"variable": [
+														{
+															"key": "userId",
+															"value": "00000000-0000-0000-0000-000000000000"
+														}
+													]
+												}
+											},
+											"_postman_previewlanguage": null,
+											"header": null,
+											"cookie": [],
+											"body": "{\r\n    \"status\": \"Error\",\r\n    \"message\": \"User ID cannot be empty.\"\r\n}"
 										}
 									]
 								},
