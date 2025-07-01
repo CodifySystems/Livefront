@@ -2,6 +2,9 @@ using System.Text.Json.Serialization;
 
 namespace CartonCaps.Domain.Enums;
 
+/// <summary>
+/// Enumeration representing the status of a referral.
+/// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum ReferralStatus
 {

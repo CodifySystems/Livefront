@@ -1,3 +1,4 @@
+using CartonCaps.Application.Common.Exceptions;
 using CartonCaps.Application.Repositories;
 using CartonCaps.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -19,14 +20,6 @@ public class UserRepository : IUserRepository
     public UserRepository(MockDbContext context)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
-
-        // _context.Database.EnsureCreated();
-
-        // // Seed initial data if necessary
-        // if (!_context.Users.Any())
-        // {
-        //     _context.SeedData();
-        // }
     }
 
     /// <summary>
@@ -35,14 +28,22 @@ public class UserRepository : IUserRepository
     /// <param name="userId"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    public Task<User> GetUserByIdAsync(Guid userId)
+    public async Task<User> GetUserByIdAsync(Guid userId)
     {
         if (userId == Guid.Empty)
         {
             throw new ArgumentNullException("User Id cannot be empty.", nameof(userId));
         }
 
-        // Simulate fetching a user from a database or service
-        return _context.Users.FirstAsync(u => u.UserId == userId);
+        // Retrieve the user by UserId
+        var result = await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
+        if (result == null || result.UserId == Guid.Empty)
+        {
+            throw new NotFoundException("User not found.");
+        }
+        else
+        {
+            return result;
+        }
     }
 }

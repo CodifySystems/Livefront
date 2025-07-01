@@ -182,5 +182,21 @@
             Gets or sets the referral status after the update.
             </summary>
         </member>
+        <member name="T:CartonCaps.WebAPI.ResponseModels.SuccessResponse">
+            <summary>
+            Represents an API response indicating a successful operation.
+            </summary>
+        </member>
+        <member name="M:CartonCaps.WebAPI.ResponseModels.SuccessResponse.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:CartonCaps.WebAPI.ResponseModels.SuccessResponse"/> class.
+            Sets the default status to "Success".
+            </summary>
+        </member>
+        <member name="P:CartonCaps.WebAPI.ResponseModels.SuccessResponse.Message">
+            <summary>
+            Gets or sets the success message.
+            </summary>
+        </member>
     </members>
 </doc>

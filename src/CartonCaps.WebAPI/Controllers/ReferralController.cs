@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using CartonCaps.Application.Repositories;
 using CartonCaps.WebAPI.ResponseModels;
+using CartonCaps.Application.Common.Exceptions;
 
 namespace CartonCaps.WebAPI.Controllers
 {
@@ -40,9 +41,8 @@ namespace CartonCaps.WebAPI.Controllers
         {
             if (userId == Guid.Empty)
             {
-                return BadRequest(new
+                return BadRequest(new BadRequestResponse()
                 {
-                    Status = "Error",
                     Message = "User ID cannot be empty."
                 });
             }
@@ -67,16 +67,10 @@ namespace CartonCaps.WebAPI.Controllers
                     });
                 }
             }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(new BadRequestResponse()
-                {
-                    Message = ex.Message
-                });
-            }
             catch (Exception ex)
             {
-                return StatusCode(500, new ErrorResponse() {
+                return StatusCode(500, new ErrorResponse()
+                {
                     Details = ex.Message
                 });
             }
@@ -102,22 +96,24 @@ namespace CartonCaps.WebAPI.Controllers
             {
                 var referral = await _referralRepository.AddReferralForUserAsync(userId);
 
+                if (referral == null)
+                {
+                    return NotFound(new BadRequestResponse()
+                    {
+                        Message = "Referral could not be created."
+                    });
+                }
+
                 return Ok(new NewReferralResponse()
                 {
                     ReferralId = referral.ReferralId,
                     ShareLink = referral.ReferredDeepLink
                 });
             }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(new BadRequestResponse()
-                {
-                    Message = ex.Message
-                });
-            }
             catch (Exception ex)
             {
-                return StatusCode(500, new ErrorResponse() {
+                return StatusCode(500, new ErrorResponse()
+                {
                     Details = ex.Message
                 });
             }
@@ -159,7 +155,7 @@ namespace CartonCaps.WebAPI.Controllers
                     NewStatus = updatedReferral.Status
                 });
             }
-            catch (ArgumentException ex)
+            catch (BadRequestException ex)
             {
                 return BadRequest(new BadRequestResponse()
                 {
@@ -168,7 +164,8 @@ namespace CartonCaps.WebAPI.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new ErrorResponse() {
+                return StatusCode(500, new ErrorResponse()
+                {
                     Details = ex.Message
                 });
             }
@@ -188,7 +185,7 @@ namespace CartonCaps.WebAPI.Controllers
             {
                 return BadRequest(new BadRequestResponse()
                 {
-                    Message = "Referral ID and User ID cannot be empty."
+                    Message = "Referral ID and Claimed by User ID cannot be empty."
                 });
             }
 
@@ -210,16 +207,24 @@ namespace CartonCaps.WebAPI.Controllers
                     NewStatus = updatedReferral.Status
                 });
             }
-            catch (ArgumentException ex)
+            catch (BadRequestException ex)
             {
                 return BadRequest(new BadRequestResponse()
                 {
                     Message = ex.Message
                 });
             }
+            catch (NotFoundException ex)
+            {
+                return NotFound(new BadRequestResponse()
+                {
+                    Message = ex.Message
+                });
+            }
             catch (Exception ex)
             {
-                return StatusCode(500, new ErrorResponse() {
+                return StatusCode(500, new ErrorResponse()
+                {
                     Details = ex.Message
                 });
             }

@@ -41,25 +41,27 @@ public class ReferralRepository : IReferralRepository
 
         // Check if user exists
         UserRepository userRepository = new UserRepository(_context);
-        var query = userRepository.GetUserByIdAsync(userId);
-        if (query == null || query.Result == null)
+        var user = await userRepository.GetUserByIdAsync(userId);
+        if (user == null || user.UserId == Guid.Empty)
         {
             throw new NotFoundException("Specified user not found.");
         }
-
-        // User record exists, proceed to create referral
-        var user = query.Result;
-        var referral = new Referral
+        else
         {
-            UserId = user.UserId,
-            ReferredDeepLink = DeepLinkService.GetDeepLink(user.UserId, user.ReferralCode),
-            Status = ReferralStatus.InProgress // Default status
-        };
 
-        // Save referral to the database
-        await _context.Referrals.AddAsync(referral);
-        await _context.SaveChangesAsync();
-        return referral;
+            // User record exists, proceed to create referral
+            var referral = new Referral
+            {
+                UserId = user.UserId,
+                ReferredDeepLink = DeepLinkService.GetDeepLink(user.UserId, user.ReferralCode),
+                Status = ReferralStatus.InProgress // Default status
+            };
+
+            // Save referral to the database
+            await _context.Referrals.AddAsync(referral);
+            await _context.SaveChangesAsync();
+            return referral;
+        }
     }
 
     /// <summary>
@@ -68,17 +70,27 @@ public class ReferralRepository : IReferralRepository
     /// <param name="userId">User ID to retrieve referrals for</param>
     /// <returns>List of Referral entities</returns>
     /// <exception cref="ArgumentNullException"></exception>
-    public Task<List<Referral>> GetReferralsByUserIdAsync(Guid userId)
+    public async Task<List<Referral>> GetReferralsByUserIdAsync(Guid userId)
     {
         if (userId == Guid.Empty)
         {
             throw new ArgumentNullException("User Id cannot be empty.", nameof(userId));
         }
 
-        // Fetch referrals for the specified user
-        return _context.Referrals
-            .Where(r => r.UserId == userId)
-            .ToListAsync();
+        // Check if user exists
+        UserRepository userRepository = new UserRepository(_context);
+        var user = await userRepository.GetUserByIdAsync(userId);
+        if (user == null || user.UserId == Guid.Empty)
+        {
+            throw new NotFoundException("Specified user not found.");
+        }
+        else
+        {
+            // Fetch referrals for the specified user
+            return await _context.Referrals
+                .Where(r => r.UserId == userId)
+                .ToListAsync();
+        }
     }
 
     /// <summary>
@@ -88,7 +100,6 @@ public class ReferralRepository : IReferralRepository
     /// <param name="status">Referral status value</param>
     /// <returns>Claimed referral entity.</returns>
     /// <exception cref="ArgumentNullException"></exception>
-    /// <exception cref="ArgumentException"></exception>
     /// <exception cref="BadRequestException"></exception>
     public Task<Referral> UpdateReferralStatusAsync(Guid referralId, ReferralStatus status)
     {
@@ -101,7 +112,7 @@ public class ReferralRepository : IReferralRepository
         var referral = _context.Referrals.FirstAsync(r => r.ReferralId == referralId);
         if (referral == null)
         {
-            throw new ArgumentException("Referral not found.");
+            throw new BadRequestException("Referral not found.");
         }
 
         // Validate the status change
@@ -139,6 +150,7 @@ public class ReferralRepository : IReferralRepository
     /// <returns>Claimed referral entity.</returns>
     /// <exception cref="ArgumentNullException"></exception>
     /// <exception cref="BadRequestException"></exception>
+    /// <exception cref="NotFoundException"></exception>
     public async Task<Referral> ClaimReferralAsync(Guid referralId, Guid claimedByUserId)
     {
         if (referralId == Guid.Empty)
@@ -153,7 +165,7 @@ public class ReferralRepository : IReferralRepository
 
         // Find the referral by Id
         var referral = await _context.Referrals.FirstOrDefaultAsync(r => r.ReferralId == referralId)
-            ?? throw new BadRequestException("Referral not found.");
+            ?? throw new NotFoundException("Referral not found.");
 
         // Check if the referral has already been claimed by another user
         if (referral.ClaimedByUserId != null && referral.ClaimedByUserId != Guid.Empty)

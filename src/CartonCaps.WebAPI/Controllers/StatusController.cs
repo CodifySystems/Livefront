@@ -1,3 +1,4 @@
+using CartonCaps.WebAPI.ResponseModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CartonCaps.WebAPI.Controllers
@@ -16,7 +17,9 @@ namespace CartonCaps.WebAPI.Controllers
         {
             // Return a simple status message
             //TODO: This should also check database connectivity, dependencies, etc.
-            return Ok(new { Status = "CartonCaps API is running smoothly!" });
+            return Ok(new SuccessResponse()
+            {
+                Message = "CartonCaps API is running smoothly!" });
         }
     }
 }

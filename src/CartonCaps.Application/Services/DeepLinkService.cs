@@ -12,21 +12,17 @@ public static class DeepLinkService
     /// <param name="referralCode">User's Referral Code to be used for the deep link</param>
     /// <returns>Shareable Deferred Deep Link URI</returns>
     /// <example>GetDeepLink(user.UserId, user.ReferralCode)</example>
-    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
     public static string GetDeepLink(Guid userId, string referralCode)
     {
         // Validate inputs to ensure they exist in the database
         if (userId == Guid.Empty)
         {
-            throw new ArgumentException("User ID cannot be empty.", nameof(userId));
+            throw new ArgumentNullException("User ID cannot be empty.", nameof(userId));
         }
         if (string.IsNullOrEmpty(referralCode))
         {
-            throw new ArgumentException("Referral code cannot be null or empty.", nameof(referralCode));
-        }
-        if (referralCode.Length < 6 || referralCode.Length > 12)
-        {
-            throw new ArgumentException("Referral code must be between 6 and 12 characters long.", nameof(referralCode));
+            throw new ArgumentNullException("Referral code cannot be null or empty.", nameof(referralCode));
         }
 
         // Call 3rd party service to generate the deep link

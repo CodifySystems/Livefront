@@ -74,7 +74,6 @@
             <param name="status">Referral status value</param>
             <returns>Claimed referral entity.</returns>
             <exception cref="T:System.ArgumentNullException"></exception>
-            <exception cref="T:System.ArgumentException"></exception>
             <exception cref="T:CartonCaps.Application.Common.Exceptions.BadRequestException"></exception>
         </member>
         <member name="M:CartonCaps.Infrastructure.Repositories.ReferralRepository.ClaimReferralAsync(System.Guid,System.Guid)">
@@ -86,6 +85,7 @@
             <returns>Claimed referral entity.</returns>
             <exception cref="T:System.ArgumentNullException"></exception>
             <exception cref="T:CartonCaps.Application.Common.Exceptions.BadRequestException"></exception>
+            <exception cref="T:CartonCaps.Application.Common.Exceptions.NotFoundException"></exception>
         </member>
         <member name="T:CartonCaps.Infrastructure.Repositories.UserRepository">
             <summary>
