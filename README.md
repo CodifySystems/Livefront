@@ -1,4 +1,4 @@
-# Carton Caps Sample Web API Aplication
+# Carton Caps Sample Web API Application
 
 Sample application for the LiveFront Carton Caps coding challenge.
 Implemented in ASP.NET Core for maxium compatibility and can be compiled and run on Windows, Linux and MacOS
@@ -9,6 +9,13 @@ This sample project uses Entity Framework to mock a simple database for use in t
 The application also assume the deferred deep links will be provided with a 3rd part service. This too is mocked out in the Application project under /Services. In a fully production ready app, this would be further built out to include proper service references and shared secrets manager for authenticating into the 3rd party API and exchanging the necessary data to generate the shareable links.
 
 Final assumption is that authentication and authorization will be handled by an existing API and passed via a token or shared secret. This example API uses no-auth to simplify testing for an unknown authentication provider.
+
+## Prerequisites
+
+[.NET 9 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
+
+*Note: To run on .NET 8, see branch [dotnet8](https://github.com/CodifySystems/Livefront/tree/dotnet8#)*
+
 
 ## Quick Start
 To quickly get up and running, clone repo and run the CartonCaps.WebAPI project
