@@ -26,7 +26,8 @@
 									"path": [
 										"status"
 									]
-								}
+								},
+								"description": "Checks API health status"
 							},
 							"response": [
 								{
@@ -51,7 +52,6 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"name": "Content-Type",
 											"description": "",
 											"type": "text"
 										}
@@ -87,7 +87,8 @@
 								}
 							]
 						}
-					]
+					],
+					"description": "API Health Status"
 				},
 				{
 					"name": "referral",
@@ -115,7 +116,8 @@
 													"value": "{{userId}}"
 												}
 											]
-										}
+										},
+										"description": "HTTP Post method used to create a new referral and return a shareable link."
 									},
 									"response": [
 										{
@@ -176,7 +178,8 @@
 													"value": "{{userId}}"
 												}
 											]
-										}
+										},
+										"description": "Gets a list of referral objects for the specified user. Allows for user to monitor status of referrals."
 									},
 									"response": [
 										{
@@ -213,7 +216,7 @@
 												}
 											],
 											"cookie": [],
-											"body": "{\r\n  \"status\": \"Success\",\r\n  \"totalCount\": 3,\r\n  \"referrals\": [\r\n    {\r\n      \"referralId\": \"1d1fbb4e-0b6f-4392-9450-43a466bf9aa0\",\r\n      \"userId\": \"29fd60d2-cf8b-4f93-ab8b-d9e5d768fc1a\",\r\n      \"shareLink\": \"https://cartoncaps.link/lo32ing90ab?referralCode=AL1C3B\",\r\n      \"status\": \"InProgress\",\r\n      \"id\": 1,\r\n      \"createdAt\": \"2025-06-29T01:47:29.2022335Z\",\r\n      \"updatedAt\": \"2025-06-29T01:47:29.2022339Z\"\r\n    },\r\n    {\r\n      \"referralId\": \"db81c0d6-3131-41ee-8c3a-97bd4e10bb8a\",\r\n      \"userId\": \"29fd60d2-cf8b-4f93-ab8b-d9e5d768fc1a\",\r\n      \"shareLink\": \"https://cartoncaps.link/pqj82jabb9q?referralCode=AL1C3B\",\r\n      \"status\": \"Completed\",\r\n      \"id\": 2,\r\n      \"createdAt\": \"2025-06-29T01:47:29.2024501Z\",\r\n      \"updatedAt\": \"2025-06-29T01:47:29.2024505Z\"\r\n    },\r\n    {\r\n      \"referralId\": \"d8bacd3f-c9ca-45a7-ac2f-9b8f56c3a3fe\",\r\n      \"userId\": \"29fd60d2-cf8b-4f93-ab8b-d9e5d768fc1a\",\r\n      \"shareLink\": \"https://cartoncaps.link/lo32dq4abbe?referralCode=AL1C3B\",\r\n      \"status\": \"Abandoned\",\r\n      \"id\": 3,\r\n      \"createdAt\": \"2025-06-29T01:47:29.2024517Z\",\r\n      \"updatedAt\": \"2025-06-29T01:47:29.2024517Z\"\r\n    }\r\n  ]\r\n}"
+											"body": "{\r\n  \"status\": \"Success\",\r\n  \"totalCount\": 3,\r\n  \"referrals\": [\r\n    {\r\n      \"referralId\": \"714c572a-4ff7-4801-8684-2672ade84c1b\",\r\n      \"userId\": \"29fd60d2-cf8b-4f93-ab8b-d9e5d768fc1a\",\r\n      \"claimedByUserId\": null,\r\n      \"claimedByUserName\": null,\r\n      \"shareLink\": \"https://cartoncaps.link/lo32ing90ab?referralCode=AL1C3B\",\r\n      \"status\": \"InProgress\",\r\n      \"createdAt\": \"2025-06-30T21:04:36.8822527Z\",\r\n      \"updatedAt\": \"2025-06-30T21:04:36.882253Z\"\r\n    },\r\n    {\r\n      \"referralId\": \"13d2920e-f5c4-4ee6-a97a-1ff50d55eda8\",\r\n      \"userId\": \"29fd60d2-cf8b-4f93-ab8b-d9e5d768fc1a\",\r\n      \"claimedByUserId\": \"b1c2d3e4-f5a6-7b8c-9d0e-f1a2b3c4d5e6\",\r\n      \"claimedByUserName\": \"Kathleen H.\",\r\n      \"shareLink\": \"https://cartoncaps.link/pqj82jabb9q?referralCode=AL1C3B\",\r\n      \"status\": \"Completed\",\r\n      \"createdAt\": \"2025-06-30T21:04:36.8825754Z\",\r\n      \"updatedAt\": \"2025-06-30T21:04:36.8825758Z\"\r\n    },\r\n    {\r\n      \"referralId\": \"5c3f2acc-cabb-422d-89fa-d7d616ed382c\",\r\n      \"userId\": \"29fd60d2-cf8b-4f93-ab8b-d9e5d768fc1a\",\r\n      \"claimedByUserId\": null,\r\n      \"claimedByUserName\": null,\r\n      \"shareLink\": \"https://cartoncaps.link/lo32dq4abbe?referralCode=AL1C3B\",\r\n      \"status\": \"Abandoned\",\r\n      \"createdAt\": \"2025-06-30T21:04:36.8827979Z\",\r\n      \"updatedAt\": \"2025-06-30T21:04:36.8827983Z\"\r\n    }\r\n  ]\r\n}"
 										},
 										{
 											"name": "No Results",
@@ -280,7 +283,6 @@
 												{
 													"key": "Content-Type",
 													"value": "application/json",
-													"name": "Content-Type",
 													"description": "",
 													"type": "text"
 												}
@@ -290,7 +292,8 @@
 										}
 									]
 								}
-							]
+							],
+							"description": "User ID for referral API calls"
 						},
 						{
 							"name": "statuses",
@@ -309,7 +312,8 @@
 												"referral",
 												"statuses"
 											]
-										}
+										},
+										"description": "Gets a list of valid status options and their associated values."
 									},
 									"response": [
 										{
@@ -318,11 +322,14 @@
 												"method": "GET",
 												"header": [],
 												"url": {
-													"raw": "{{baseUrl}}/referral/statuses",
+													"raw": "http://localhost:5155/api/referral/statuses",
+													"protocol": "http",
 													"host": [
-														"{{baseUrl}}"
+														"localhost"
 													],
+													"port": "5155",
 													"path": [
+														"api",
 														"referral",
 														"statuses"
 													]
@@ -333,13 +340,12 @@
 												{
 													"key": "Content-Type",
 													"value": "application/json",
-													"name": "Content-Type",
 													"description": "",
 													"type": "text"
 												}
 											],
 											"cookie": [],
-											"body": "{\r\n    \"status\": \"Success\",\r\n    \"referralStatuses\": [\r\n        {\r\n            \"name\": \"InProgress\",\r\n            \"value\": 0\r\n        },\r\n        {\r\n            \"name\": \"Completed\",\r\n            \"value\": 1\r\n        },\r\n        {\r\n            \"name\": \"Abandoned\",\r\n            \"value\": 2\r\n        }\r\n    ]\r\n}"
+											"body": "[\r\n    {\r\n        \"name\": \"InProgress\",\r\n        \"value\": 0\r\n    },\r\n    {\r\n        \"name\": \"Completed\",\r\n        \"value\": 1\r\n    },\r\n    {\r\n        \"name\": \"Abandoned\",\r\n        \"value\": 2\r\n    }\r\n]"
 										}
 									]
 								}
@@ -388,7 +394,8 @@
 															"value": ""
 														}
 													]
-												}
+												},
+												"description": "Updates the specified referral from the route with the status option in the route detail."
 											},
 											"response": [
 												{
@@ -410,11 +417,11 @@
 															"variable": [
 																{
 																	"key": "referralId",
-																	"value": "421f3027-0857-4ac4-b664-196be5fd930a"
+																	"value": "714c572a-4ff7-4801-8684-2672ade84c1b"
 																},
 																{
 																	"key": "status",
-																	"value": "Completed"
+																	"value": "Abandoned"
 																}
 															]
 														}
@@ -431,17 +438,245 @@
 														}
 													],
 													"cookie": [],
-													"body": "{\r\n  \"status\": \"Success\",\r\n  \"message\": \"Referral status updated successfully.\",\r\n  \"referralId\": 1,\r\n  \"newStatus\": \"Completed\"\r\n}"
+													"body": "{\r\n  \"status\": \"Success\",\r\n  \"message\": \"Referral status updated successfully.\",\r\n  \"referralId\": \"714c572a-4ff7-4801-8684-2672ade84c1b\",\r\n  \"newStatus\": \"Abandoned\"\r\n}"
+												},
+												{
+													"name": "Already Claimed",
+													"originalRequest": {
+														"method": "PATCH",
+														"header": [],
+														"body": {
+															"mode": "formdata",
+															"formdata": [
+																{
+																	"key": "ReferralStatus",
+																	"value": "Completed",
+																	"type": "text"
+																}
+															]
+														},
+														"url": {
+															"raw": "{{baseUrl}}/referral/:referralId/status/:status",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"referral",
+																":referralId",
+																"status",
+																":status"
+															],
+															"variable": [
+																{
+																	"key": "referralId",
+																	"value": "13d2920e-f5c4-4ee6-a97a-1ff50d55eda8"
+																},
+																{
+																	"key": "status",
+																	"value": "Completed"
+																}
+															]
+														}
+													},
+													"status": "Bad Request",
+													"code": 400,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json",
+															"description": "",
+															"type": "text"
+														}
+													],
+													"cookie": [],
+													"body": ""
 												}
 											]
 										}
-									]
+									],
+									"description": "Used to update the status of an individual referral"
+								},
+								{
+									"name": "claim",
+									"item": [
+										{
+											"name": "Claim Referral",
+											"request": {
+												"method": "POST",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/referral/:referralId/claim/:claimedByUserId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"referral",
+														":referralId",
+														"claim",
+														":claimedByUserId"
+													],
+													"variable": [
+														{
+															"key": "referralId",
+															"value": "",
+															"description": "Referral ID to claim"
+														},
+														{
+															"key": "claimedByUserId",
+															"value": "",
+															"description": "UserId to use to claim referral"
+														}
+													]
+												},
+												"description": "Claims a referral for the specified user in the route details."
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "POST",
+														"header": [],
+														"url": {
+															"raw": "{{baseUrl}}/referral/:referralId/claim/:claimedByUserId",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"referral",
+																":referralId",
+																"claim",
+																":claimedByUserId"
+															],
+															"variable": [
+																{
+																	"key": "referralId",
+																	"value": "714c572a-4ff7-4801-8684-2672ade84c1b",
+																	"description": "Referral ID to claim"
+																},
+																{
+																	"key": "claimedByUserId",
+																	"value": "fd9e60df-7b1c-41fa-8e96-ee561a7ee870",
+																	"description": "UserId to use to claim referral"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json",
+															"description": "",
+															"type": "text"
+														}
+													],
+													"cookie": [],
+													"body": ""
+												},
+												{
+													"name": "Referral Already Claimed",
+													"originalRequest": {
+														"method": "POST",
+														"header": [],
+														"url": {
+															"raw": "{{baseUrl}}/referral/:referralId/claim/:claimedByUserId",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"referral",
+																":referralId",
+																"claim",
+																":claimedByUserId"
+															],
+															"variable": [
+																{
+																	"key": "referralId",
+																	"value": "13d2920e-f5c4-4ee6-a97a-1ff50d55eda8",
+																	"description": "Referral ID to claim"
+																},
+																{
+																	"key": "claimedByUserId",
+																	"value": "fd9e60df-7b1c-41fa-8e96-ee561a7ee870",
+																	"description": "UserId to use to claim referral"
+																}
+															]
+														}
+													},
+													"status": "Bad Request",
+													"code": 400,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json",
+															"description": "",
+															"type": "text"
+														}
+													],
+													"cookie": [],
+													"body": ""
+												},
+												{
+													"name": "User Already Claimed",
+													"originalRequest": {
+														"method": "POST",
+														"header": [],
+														"url": {
+															"raw": "{{baseUrl}}/referral/:referralId/claim/:claimedByUserId",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"referral",
+																":referralId",
+																"claim",
+																":claimedByUserId"
+															],
+															"variable": [
+																{
+																	"key": "referralId",
+																	"value": "714c572a-4ff7-4801-8684-2672ade84c1b",
+																	"description": "Referral ID to claim"
+																},
+																{
+																	"key": "claimedByUserId",
+																	"value": "b1c2d3e4-f5a6-7b8c-9d0e-f1a2b3c4d5e6",
+																	"description": "UserId to use to claim referral"
+																}
+															]
+														}
+													},
+													"status": "Bad Request",
+													"code": 400,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json",
+															"description": "",
+															"type": "text"
+														}
+													],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										}
+									],
+									"description": "API route for claiming referrals"
 								}
-							]
+							],
+							"description": "Referral API route to manage individual referral requests"
 						}
-					]
+					],
+					"description": "Referral API folder. Contains multiple methods to manage Carton Caps referrals"
 				}
-			]
+			],
+			"description": "API root path"
 		}
 	],
 	"event": [
