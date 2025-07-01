@@ -1,0 +1,257 @@
+openapi: 3.0.0
+info:
+  title: CartonCaps
+  version: 1.0.0
+  description: >-
+    Carton Caps is an app that empowers consumers to raise money for the schools
+    they care about, while buying the everyday products they love.
+servers:
+  - url: http://localhost:5155/api
+    description: Server description
+paths:
+  /status:
+    parameters: []
+    get:
+      summary: Get API Status
+      parameters: []
+      responses:
+        '200':
+          headers:
+            Content-Type:
+              schema:
+                type: string
+              example: application/json
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+        '500':
+          headers: {}
+          description: Error
+  /referral/{userId}:
+    parameters:
+      - name: userId
+        in: path
+        required: true
+        example: '{{userId}}'
+        schema:
+          type: string
+    post:
+      summary: Create Referral Share Link
+      parameters: []
+      responses:
+        '201':
+          headers:
+            Content-Type:
+              schema:
+                type: string
+              example: application/json
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+                  referralId:
+                    type: string
+                  shareLink:
+                    type: string
+                    format: uri
+        default:
+          headers: {}
+          description: User Not Found
+    get:
+      summary: Get Referrals
+      parameters: []
+      responses:
+        '200':
+          headers:
+            Content-Type:
+              schema:
+                type: string
+              example: application/json
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  totalCount:
+                    type: integer
+                  referrals:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        referralId:
+                          type: string
+                        userId:
+                          type: string
+                        claimedByUserId:
+                          nullable: true
+                        claimedByUserName:
+                          nullable: true
+                        shareLink:
+                          type: string
+                          format: uri
+                        status:
+                          type: string
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+        '400':
+          headers:
+            Content-Type:
+              schema:
+                type: string
+              example: application/json
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+        '404':
+          headers:
+            Content-Type:
+              schema:
+                type: string
+              example: application/json
+          description: No Results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+  /referral/statuses:
+    parameters: []
+    get:
+      summary: Get Statuses
+      parameters: []
+      responses:
+        default:
+          headers:
+            Content-Type:
+              schema:
+                type: string
+              example: application/json
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    value:
+                      type: integer
+  /referral/{referralId}/status/{status}:
+    parameters:
+      - name: referralId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: status
+        in: path
+        required: true
+        schema:
+          type: string
+    patch:
+      summary: Update Referral Status
+      parameters: []
+      responses:
+        '202':
+          headers:
+            Content-Type:
+              schema:
+                type: string
+              example: application/json
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+                  referralId:
+                    type: string
+                  newStatus:
+                    type: string
+        '400':
+          headers:
+            Content-Type:
+              schema:
+                type: string
+              example: application/json
+          description: Already Claimed
+          content:
+            application/json:
+              schema:
+                type: object
+  /referral/{referralId}/claim/{claimedByUserId}:
+    parameters:
+      - name: referralId
+        in: path
+        required: true
+        description: Referral ID to claim
+        schema:
+          type: string
+      - name: claimedByUserId
+        in: path
+        required: true
+        description: UserId to use to claim referral
+        schema:
+          type: string
+    post:
+      summary: Claim Referral
+      parameters: []
+      responses:
+        '200':
+          headers:
+            Content-Type:
+              schema:
+                type: string
+              example: application/json
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          headers:
+            Content-Type:
+              schema:
+                type: string
+              example: application/json
+          description: Referral Already Claimed
+          content:
+            application/json:
+              schema:
+                type: object

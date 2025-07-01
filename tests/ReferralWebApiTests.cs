@@ -723,7 +723,9 @@ public class ReferralWebApiTests
         // Assert
         Assert.That(result, Is.Not.Null);
         Assert.That(result.StatusCode, Is.EqualTo(200));
+#pragma warning disable CS8604 // Possible null reference argument.
         var resultObject = result.Value.AsDynamicObject();
+#pragma warning restore CS8604 // Possible null reference argument.
         Assert.That(resultObject, Is.Not.Null);
         Assert.That(resultObject.Count, Is.EqualTo(statusList.Count));
         for (int i = 0; i < statusList.Count; i++)
