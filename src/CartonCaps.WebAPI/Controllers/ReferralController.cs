@@ -37,6 +37,9 @@ namespace CartonCaps.WebAPI.Controllers
 
         /// <summary> Gets a list of referrals.</summary>
         [HttpGet]
+        [ProducesDefaultResponseType(typeof(ReferralListResponse))]
+        [ProducesErrorResponseType(typeof(ErrorResponse))]
+        [ProducesResponseType(typeof(BadRequestResponse), 404)]
         public async Task<IActionResult> GetReferrals([FromRoute] Guid userId)
         {
             if (userId == Guid.Empty)
@@ -54,7 +57,8 @@ namespace CartonCaps.WebAPI.Controllers
 
                 if (referrals == null || referrals.Count == 0)
                 {
-                    return NotFound(new BadRequestResponse() {
+                    return NotFound(new BadRequestResponse()
+                    {
                         Message = "No referrals found for this user."
                     });
                 }
@@ -66,6 +70,13 @@ namespace CartonCaps.WebAPI.Controllers
                         Referrals = referrals
                     });
                 }
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(new BadRequestResponse()
+                {
+                    Message = ex.Message
+                });
             }
             catch (Exception ex)
             {

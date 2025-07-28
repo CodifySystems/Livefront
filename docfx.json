@@ -1,0 +1,38 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dotnet/docfx/main/schemas/docfx.schema.json",
+  "metadata": [
+    {
+      "src": [
+        {
+          "files": ["**/bin/Debug/**/CartonCaps.*.dll"],
+          "src": "./src"
+        }
+      ],
+      "dest": "api"
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "files": [
+          "api/*.yml"
+        ],
+        "exclude": [
+          "_site/**",
+          "node_modules/**"
+        ]
+      }
+    ],
+    "output": "_site",
+    "template": [
+      "default",
+      "modern"
+    ],
+    "globalMetadata": {
+      "_appName": "CartonCaps",
+      "_appTitle": "CartonCaps",
+      "_enableSearch": true,
+      "pdf": true
+    }
+  }
+}
